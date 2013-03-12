@@ -1,0 +1,14 @@
+#!/usr/bin/python
+
+import sys
+
+if __name__ == '__main__':
+    try:
+        gid = sys.argv[1]
+        print "DELETE FROM group_role WHERE group_id='%s';" % gid
+        print "DELETE FROM group_revision WHERE continuity_id='%s';" % gid
+        print "DELETE FROM member_revision WHERE group_id='%s';" % gid
+        print "DELETE FROM member WHERE group_id='%s';" % gid
+        print "DELETE FROM \"group\" WHERE id='%s';" % gid
+    except IndexError:
+        print "usage: delete_group <ckan_group_id>"
