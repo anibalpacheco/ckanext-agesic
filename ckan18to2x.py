@@ -33,7 +33,10 @@ for group_name, image_url in organization_images.iteritems():
     group = ckan.group_entity_get(group_name)
     if not group['image_url']:
         group['image_url'] = image_url
-        ckan.group_entity_put(group)
+    if not group['is_organization']:
+        group['is_organization'] = True
+    group['description'] += '.'
+    ckan.group_entity_put(group)
 
 # creation of new groups
 groups = {

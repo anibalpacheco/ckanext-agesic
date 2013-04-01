@@ -4,6 +4,3 @@ DELETE FROM package_extra WHERE key='category';
 
 -- Sacar comillas dobles innecesarias en los valores de frec. de actualizacion
 UPDATE package_extra SET value=replace(value,'"','') WHERE key='update_frequency';
-
--- Para que los organismos sean organismos y no grupos
-UPDATE "group" SET is_organization=true WHERE image_url!='';
