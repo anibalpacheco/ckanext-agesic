@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from email.utils import unquote
 import ckanclient
 
 # connect to api
@@ -16,9 +17,9 @@ organization_images = {
     'municipio-de-maldonado':
         'http://municipiomaldonado.gub.uy/imagenes/logo.png',
     'intendencia-montevideo':
-        'http://www.montevideo.gub.uy/sites/default/themes/custom/imm/logo.png',
+        'http://www.montevideo.gub.uy/sites/default/themes/custom/imm/logo.gif',
     'acce':
-        'http://agesic.gub.uy/innovaportal/file/1245/1/compras_estatales.jpg',
+      'http://www.agesic.gub.uy/innovaportal/file/1171/1/compras_estatales.jpg',
     'agesic': 'http://upload.wikimedia.org/wikipedia/commons/d/de/Agesic.jpg',
     'agev': 'http://agev.opp.gub.uy/interfase/logo_agev.gif',
     'ine': 'http://www.ine.gub.uy/imagenes/logo%20ine.png',
@@ -57,9 +58,11 @@ for name, title in groups.iteritems():
 
 # asociate datasets to groups based on category custom field
 for package_id in ckan.package_register_get():
-    group_name = ckan.package_entity_get(package_id)['extras'].get('category')
+    group_name = unquote(
+        ckan.package_entity_get(package_id)['extras'].get('category'))
     if group_name:
-        group = ckan.group_entity_get(group_name.replace('_', '-'))
+        group_name_to_get = group_name.replace('_', '-')
+        group = ckan.group_entity_get(group_name_to_get)
         if package_id not in group['packages']:
             group['packages'].append(package_id)
             ckan.group_entity_put(group)
