@@ -1,0 +1,8 @@
+{% ckan_extends %}
+
+{% block package_basic_fields_custom %}
+  {{ form.input('update_frequency', label=_('Update Frequency'), id='field-update_frequency', placeholder=_('update frequency'), value=data.update_frequency, error=errors.update_frequency, classes=['control-medium']) }}
+  {{ form.input('spatial_ref_system', label=_('Spatial Ref. System'), id='field-spatial_ref_system', placeholder=_('spatial ref system'), value=data.spatial_ref_system, error=errors.spatial_ref_system, classes=['control-medium']) }}
+  {{ form.input('spatial_coverage', label=_('Spatial Coverage'), id='field-spatial_coverage', placeholder=_('spatial coverage'), value=data.spatial_coverage, error=errors.spatial_coverage, classes=['control-medium']) }}
+  {{ form.input('temporal_coverage', label=_('Temporal Coverage'), id='field-temporal_coverage', placeholder=_('temporal coverage'), value=data.temporal_coverage, error=errors.temporal_coverage, classes=['control-medium']) }}
+{% endblock %}
