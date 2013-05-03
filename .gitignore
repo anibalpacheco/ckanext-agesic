@@ -1,3 +1,5 @@
 ckanext_agesic.egg-info
 dist
-*.pyc
+build
+*.py[c~]
+*.swp

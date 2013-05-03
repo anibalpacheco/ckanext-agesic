@@ -26,7 +26,8 @@ organization_images = {
     'onsc': 'http://www.onsc.gub.uy/onsc1/images/Cab_Logo.png',
     'mvotma': 'http://www.dinama.gub.uy/playas/images/logo_mvotma.png',
     'unasev':
-        'https://twimg0-a.akamaihd.net/profile_images/2343091374/mxecij92h8z409q6w762.jpeg'
+        'https://twimg0-a.akamaihd.net/profile_images/2343091374/mxecij92h8z409q6w762.jpeg',
+    'defensa-del-consumidor': '',
 }
 
 for group_name, image_url in organization_images.iteritems():

@@ -16,7 +16,8 @@ setup(
 	url='http://catalogodatos.gub.uy/',
 	license='GPL',
 	packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
-	namespace_packages=['ckanext', 'ckanext.agesic'],
+	namespace_packages=['ckanext', 'ckanext.agesic',
+        'ckanext.agesic.harvesters'],
 	include_package_data=True,
 	zip_safe=False,
 	install_requires=[
@@ -24,8 +25,9 @@ setup(
 	],
 	entry_points=\
 	"""
-        [ckan.plugins]
+    [ckan.plugins]
 	# Add plugins here, eg
 	agesic=ckanext.agesic.plugin:ExampleIDatasetFormPlugin
+    turismo_harvester=ckanext.agesic.harvesters.turismo:TurismoHarvester
 	""",
 )
