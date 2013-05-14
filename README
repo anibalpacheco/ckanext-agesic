@@ -1,3 +1,10 @@
 README
 
-Scripts útiles para la actualización de CKAN de 1.8 a 2.x
+AGESIC - Equipo de Arquitectura 2013
+
+== Este proyecto contiene ==
+= Plugin de CKAN para su customización =
+= Scripts para la actualización de CKAN de 1.8 a 2.x =
+
+== Para compilar el CSS se utiliza LESS ==
+$ ckan/node_modules/less/bin/lessc ckanext-agesic/ckanext/agesic/public/css/agesic.less ckanext-agesic/ckanext/agesic/templates/agesic.css
