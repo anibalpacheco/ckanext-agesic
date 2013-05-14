@@ -5,9 +5,10 @@ body {
   background-color: #DBDBDB;
   background-image: -moz-linear-gradient(center top , #DBDBDB, #FFFFFF);
   border-top: 2px solid #CCCCCC;
-}
-.site-footer, .site-footer label, .site-footer small {
   color: #333333;
+  label, small {
+    color: #333333;
+  }
 }
 a,
 .site-footer a {
@@ -21,38 +22,33 @@ a:hover, a:focus {
   background-image: -moz-linear-gradient(center top, #056BAC, #013E89);
   border-bottom: 1px solid #CCCCCC;
   box-shadow: 0 2px 15px #DDDDDD;
-  /*margin-bottom: 18px;*/
+  .account ul li {
+    border-left: none;
+    a:hover {
+      background-color: transparent;
+      text-decoration: bold;
+    }
+  }
 }
 .masthead {
   background-color: #FFFFFF;
   border: 0px solid #CECECE;
-  /*border-radius: 4px 4px 4px 4px;*/
   box-shadow: 1px 1px 2px #CCCCCC;
   color: #000000;
   height: 40px;
   margin-bottom: 20px;
   padding: 12px 20px;
-}
-.masthead .debug {
-  color: #000000;
-}
-.account-masthead .account ul li {
-  border-left: none;
-}
-.account-masthead .account ul li a:hover {
-  background-color: transparent;
-  text-decoration: bold;
+  .debug { color: #000000; }
+  a { color: #777777;
+    img {
+      padding-top: 5px;
+      margin-left: -84px;
+    }
+  }
 }
 .hero .search-giant input,
 .masthead input[type="text"] {
   border-color: #CCCCCC;
-}
-.masthead a {
-  color: #777777;
-}
-.masthead a img {
-  padding-top: 5px;
-  margin-left: -84px;
 }
 a.tag:hover,
 .masthead .navigation .nav-pills li a:hover,
@@ -60,19 +56,13 @@ a.tag:hover,
   color: #FFFFFF;
   background-color: #095399;
 }
-.hero {
-  background: none transparent;
+.hero { background: none transparent;
+  .module-dark { color: #444444;
+    .module-content { background-color: transparent; }
+  }
+  .tags { background-color: transparent; }
 }
-.hero .tags,
-.hero .module-dark .module-content {
-  background-color: transparent;
-}
-.hero .module-dark {
-  color: #444444;
-}
-.btn-primary {
-  background-image: linear-gradient(to bottom, #095399, #095399);
-}
+.btn-primary { background-image: linear-gradient(to bottom, #095399, #095399); }
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
@@ -85,13 +75,14 @@ a.tag:hover,
 @navItemActiveBackgroundColor: #095399;
 @pillBackgroundColor: darken(@navItemActiveBackgroundColor, 10%);
 .pill { background-color: @pillBackgroundColor;
-  a.remove:hover {
-    color: #FFFFFF;
-    text-decoration: none;
+  a.remove {
+    &:hover, &:focus {
+      color: #FFFFFF;
+      text-decoration: none;
+    }
   }
 }
-.nav-item.active > a {
-  background-color: #6f6f6f;
+.nav-item.active > a { background-color: #6f6f6f;
   &:hover { background-color: #6f6f6f; }
   &:before { background-image: url("/images/nav-active.png"); }
 }
