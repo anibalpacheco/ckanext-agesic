@@ -2336,17 +2336,21 @@ msgstr "Seguidores"
 #: ckan/templates/group/index.html:3 ckan/templates_legacy/group/index.html:6
 #: ckan/templates_legacy/group/index.html:7
 msgid "Groups of Datasets"
-msgstr "Grupos de conjuntos de datos"
+msgstr "Categorías de conjuntos de datos"
 
 #: ckan/templates/group/index.html:11
 #: ckan/templates/package/snippets/package_metadata_fields.html:46
 #: ckan/templates_legacy/js_strings.html:16
 msgid "Add Group"
-msgstr "Añadir grupo"
+msgstr "Añadir Categoría"
+
+#: ckan/templates/group/index.html:20
+msgid "Search groups..."
+msgstr "Buscar categorías..."
 
 #: ckan/templates/group/index.html:23
 msgid "There are currently no groups for this site"
-msgstr "No existen actualmente grupos para este sitio"
+msgstr "No existen actualmente categorías en el catálogo"
 
 #: ckan/templates/group/index.html:25
 #: ckan/templates/organization/index.html:25
@@ -2356,7 +2360,7 @@ msgstr "¿Qué tal creando uno?"
 
 #: ckan/templates/group/index.html:38
 msgid "What are Groups?"
-msgstr "¿Qué son los Grupos?"
+msgstr "¿Qué son las Categorías?"
 
 #: ckan/templates/group/index.html:41
 msgid ""
@@ -2365,7 +2369,7 @@ msgid ""
 "to make it easier for users to browse datasets by theme. Datasets can be "
 "part of a group, but do not belong to the group for editing or authorisation"
 " purposes.</p> "
-msgstr "<p>Los Grupos le permiten agrupar conjuntos de datos dentro de una comunidad (por ejemplo, datos de Derechos Civiles) o un tema (ej: Transporte, Salud, Medio Ambiente) para facilitarle a los usuarios buscar conjuntos de datos por tema. Los conjuntos de datos pueden formar parte de un grupo, pero no pertenecen al grupo para propósitos de edición o autorización.</p>"
+msgstr "<p>Las Categorías le permiten agrupar conjuntos de datos dentro de una comunidad (por ejemplo, datos de Derechos Civiles) o un tema (ej: Transporte, Salud, Medio Ambiente) para facilitarle a los usuarios buscar conjuntos de datos por tema. Los conjuntos de datos pueden formar parte de una categoría, pero no pertenecen a la categoría para propósitos de edición o autorización.</p>"
 
 #: ckan/templates/group/member_new.html:13
 #: ckan/templates/group/members.html:19
@@ -3592,22 +3596,22 @@ msgstr "Lo sentimos, no se encontraron conjuntos de datos"
 #: ckan/templates/snippets/search_result_text.html:21
 msgid "{number} group found for \"{query}\""
 msgid_plural "{number} groups found for \"{query}\""
-msgstr[0] "{number} grupo encontrado para \"{query}\""
-msgstr[1] "{number} grupos encontrados para \"{query}\""
+msgstr[0] "{number} categoría encontrado para \"{query}\""
+msgstr[1] "{number} categorías encontradas para \"{query}\""
 
 #: ckan/templates/snippets/search_result_text.html:22
 msgid "Sorry no groups found for \"{query}\""
-msgstr "Lo sentimos, no se encontraron grupos para \"{query}\""
+msgstr "Lo sentimos, no se encontraron categorías para \"{query}\""
 
 #: ckan/templates/snippets/search_result_text.html:23
 msgid "{number} group found"
 msgid_plural "{number} groups found"
-msgstr[0] "{number} grupo encontrado"
-msgstr[1] "{number} grupos encontrados"
+msgstr[0] "{number} categoría encontrada"
+msgstr[1] "{number} categorías encontradas"
 
 #: ckan/templates/snippets/search_result_text.html:24
 msgid "Sorry no groups found"
-msgstr "Lo sentimos, no se encontraron grupos"
+msgstr "Lo sentimos, no se encontraron categorías"
 
 #: ckan/templates/snippets/search_result_text.html:27
 msgid "{number} organization found for \"{query}\""
