@@ -1,5 +1,9 @@
 {% ckan_extends %}
 
+{% block footer_links %}
+    <li><a href="http://datos.gub.uy/wps/wcm/connect/856cc1804db0463baa8bea01b72d8394/terminos-catalogodatos.pdf?MOD=AJPERES&amp;ContentCache=NONE&amp;CACHEID=856cc1804db0463baa8bea01b72d8394">{{ _('Terms of use') }} (.pdf)</a></li>
+    {{ super() }}
+{% endblock %}
 {% block footer_attribution %}
     <p><img alt="AGESIC" src="/images/agesic-logo.png"></p>
 {% endblock %}

@@ -1969,6 +1969,10 @@ msgid "Error %(error_code)s"
 msgstr "Error %(error_code)s"
 
 #: ckan/templates/footer.html:9
+msgid "Terms of use"
+msgstr "Términos de uso"
+
+#: ckan/templates/footer.html:9
 msgid "About {0}"
 msgstr "Acerca de {0}"
 
