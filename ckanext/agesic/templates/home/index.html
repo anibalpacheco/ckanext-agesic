@@ -5,3 +5,15 @@
         <iframe width="408" height="225" src="http://www.youtube.com/embed/jzzP6EmtkiE" frameborder="0" allowfullscreen></iframe>
     </section>
 {% endblock %}
+
+{% block home_secondary_content %}
+    {{ super() }}
+    <div class="module module-shallow module-narrow module-dark info box">
+        <div style="padding:0px 15px 10px 15px;">
+            <h3 class="heading">{{ _("Applications") }}</h3>
+            <a class="btn" href="#">Add application</a>
+            &nbsp;
+            <a class="btn" href="/related?type=application">Show applications</a>
+        </div>
+   </div>
+{% endblock %}
