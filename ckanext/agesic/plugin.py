@@ -40,6 +40,14 @@ def country_codes():
         return None
 
 
+def hello():
+    """
+    An example to return HTML that can be rendered in the templates calling
+    {{ h.hello() }}
+    """
+    return plugins.toolkit.literal('<p>Hello</p>')
+
+
 class ExampleIDatasetFormPlugin(plugins.SingletonPlugin,
         tk.DefaultDatasetForm):
     '''An example IDatasetForm CKAN plugin.
@@ -47,6 +55,7 @@ class ExampleIDatasetFormPlugin(plugins.SingletonPlugin,
     Uses a tag vocabulary to add a custom metadata field to datasets.
 
     '''
+    plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(plugins.IConfigurer, inherit=False)
     plugins.implements(plugins.IDatasetForm, inherit=False)
     plugins.implements(plugins.ITemplateHelpers, inherit=False)
@@ -63,6 +72,17 @@ class ExampleIDatasetFormPlugin(plugins.SingletonPlugin,
     num_times_check_data_dict_called = 0
     num_times_setup_template_variables_called = 0
 
+    def after_map(self, map):
+        """
+        Example to use if we want to define a route either to a new controller
+        inside our plugin or one that already defined in CKAN.
+        """
+        map.connect('apps', '/apps',
+            #controller='apps.controller:AppsController', action='index')
+            controller='controllers.related:RelatedController',
+                action='dashboard')
+        return map
+
     def update_config(self, config):
         # Add this plugin's templates dir to CKAN's extra_template_paths, so
         # that CKAN will use this plugin's custom templates.
@@ -70,7 +90,7 @@ class ExampleIDatasetFormPlugin(plugins.SingletonPlugin,
         tk.add_template_directory(config, 'templates')
 
     def get_helpers(self):
-        return {'country_codes': country_codes}
+        return {'country_codes': country_codes, 'hello': hello}
 
     def is_fallback(self):
         # Return True to register this plugin as the default handler for

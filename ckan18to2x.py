@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+import sys
 from email.utils import unquote
 import ckanclient
 
 # connect to api
-ckan = ckanclient.CkanClient(base_location='http://localhost:8000/api',
+ckan = ckanclient.CkanClient(base_location=sys.argv[1],
     api_key='cc9897bf-9f1e-4d82-92c8-be598925b3c4')
 
 # set organization images
