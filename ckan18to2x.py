@@ -29,6 +29,8 @@ organization_images = {
     'unasev':
         'https://twimg0-a.akamaihd.net/profile_images/2343091374/mxecij92h8z409q6w762.jpeg',
     'defensa-del-consumidor': '',
+    'fing': '',
+    'ursea': '',
 }
 
 for group_name, image_url in organization_images.iteritems():
