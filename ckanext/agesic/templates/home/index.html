@@ -2,7 +2,7 @@
 
 {% block home_image %}
     <section class="featured media-overlay">
-        <iframe width="408" height="225" src="http://www.youtube.com/embed/jzzP6EmtkiE" frameborder="0" allowfullscreen></iframe>
+        <iframe width="408" height="238" src="http://www.youtube.com/embed/jzzP6EmtkiE" frameborder="0" allowfullscreen></iframe>
     </section>
 {% endblock %}
 
@@ -11,9 +11,9 @@
     <div class="module module-shallow module-narrow module-dark info box">
         <div style="padding:0px 15px 10px 15px;">
             <h3 class="heading">{{ _("Applications") }}</h3>
-            <a class="btn" href="#">Add application</a>
-            &nbsp;
-            <a class="btn" href="/related?type=application">Show applications</a>
+            <p>{{ _("Add and share your own applications using open data") }}.</p>
+            <a class="btn" href="http://datos.gub.uy/wps/wcm/connect/PEU/PEU/Subhomes/enviar-aplicacion">{{ _("Add application") }}</a>&nbsp;
+            <a class="btn" href="/related?type=application">{{ _("Show applications") }}</a>
         </div>
    </div>
 {% endblock %}

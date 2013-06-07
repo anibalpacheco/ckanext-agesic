@@ -2601,6 +2601,22 @@ msgstr "ej: Precios del Oro"
 msgid "Popular Tags"
 msgstr "Etiquetas Populares"
 
+#: ckanext/agesic/templates/home/index.html:13
+msgid "Applications"
+msgstr "Aplicaciones"
+
+#: ckanext/agesic/templates/home/index.html:14
+msgid "Add and share your own applications using open data"
+msgstr "Añada sus propias aplicaciones con datos abiertos para compartirlas con otros"
+
+#: ckanext/agesic/templates/home/index.html:15
+msgid "Add application"
+msgstr "Agregar aplicación"
+
+#: ckanext/agesic/templates/home/index.html:16
+msgid "Show applications"
+msgstr "Ver aplicaciones"
+
 #: ckan/templates/home/snippets/about_text.html:1
 msgid ""
 " <p>CKAN is the world’s leading open-source data portal platform.</p> "
