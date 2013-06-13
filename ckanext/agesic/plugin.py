@@ -81,6 +81,9 @@ class ExampleIDatasetFormPlugin(plugins.SingletonPlugin,
             #controller='apps.controller:AppsController', action='index')
             controller='controllers.related:RelatedController',
                 action='dashboard')
+        #intentando remapear register para deshabilitarlo (no funciono)
+        #map.connect('register', '/user/register',
+        #    controller='controllers.home:HomeController', action='index')
         return map
 
     def update_config(self, config):
