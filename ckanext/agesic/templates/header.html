@@ -2,11 +2,19 @@
 
 {% block header %}
     <a href="http://datos.gub.uy">
-        <img width="150" src="/images/logodatosgubuy.png" alt="Datos.gub.uy Logo" title="Ir a Datos.gub.uy" id="logo" style="position:absolute;left:50%;margin-left:-560px;">
+        <img width="150" src="/images/logodatosgubuy.png" alt="Datos.gub.uy Logo" title="Ir a Datos.gub.uy" id="logo" style="position:absolute;left:50%;margin-left:-470px;">
     </a>
     {{ super() }}
 {% endblock %}
 
 {% block header_account_notlogged %}
     <li>{% link_for _('Log in'), controller='user', action='login' %}</li>
+{% endblock %}
+
+{% block header_site_navigation_tabs %}
+{{ h.build_nav_main(
+  ('search', _('Datasets')),
+  ('organizations_index', _('Organizations')),
+  ('group_index', _('Groups'))
+) }}
 {% endblock %}
