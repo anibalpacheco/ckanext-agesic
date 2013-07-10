@@ -2058,6 +2058,10 @@ msgstr "Conjuntos de datos"
 msgid "Organizations"
 msgstr "Organismos"
 
+#: ckanext/organizations/templates_legacy/organizations/index.html:20
+msgid "Search organizations..."
+msgstr "Buscar Organismos ..."
+
 #: ckan/templates/header.html:90
 msgid "Search Datasets"
 msgstr "Buscar conjuntos de datos"
@@ -3532,8 +3536,8 @@ msgid "Clear All"
 msgstr "Borrar Todo"
 
 #: ckan/templates/snippets/facet_list.html:58
-msgid "Show More {facet}"
-msgstr "Mostrar Más {facet}"
+msgid "Show More {facet_type}"
+msgstr "Mostrar Más {facet_type}"
 
 #: ckan/templates/snippets/facet_list.html:60
 msgid "Show Only Popular {facet}"
@@ -6098,3 +6102,11 @@ msgstr "Selecciona un atributo de los conjuntos de datos y descubre cuales son l
 #: ckanext/stats/templates_legacy/ckanext/stats/leaderboard.html:20
 msgid "Choose area"
 msgstr "Selecciona un área"
+
+#: ckan/templates/dataviewer/snippets/no_preview.html
+msgid "No preview available."
+msgstr "Previsualización no disponible."
+
+#: ckanext/agesic/templates/snippets/facet_list.html:65
+msgid "Uruguay Open Data Licence"
+msgstr "Licencia de Datos Abiertos de Uruguay"
