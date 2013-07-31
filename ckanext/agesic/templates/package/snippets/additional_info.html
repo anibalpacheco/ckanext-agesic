@@ -1,0 +1,29 @@
+{% ckan_extends %}
+
+{% block package_additional_info %}
+  {{ super() }} 
+  {% if pkg_dict.update_frequency %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Update Frequency") }}</th>
+      <td class="dataset-details">{{ {'1': 'Diario', '7': 'Semanal', '15': 'Quincenal', '30': 'Mensual', '60': 'Bimestral', '90': 'Trimestral', '182': 'Semestral', '365': 'Anual', '1826': 'Quinquenal'}[pkg_dict.update_frequency] }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.spatial_ref_system %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Spatial Ref. System") }}</th>
+      <td class="dataset-details">{{ pkg_dict.spatial_ref_system }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.spatial_coverage %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Spatial Coverage") }}</th>
+      <td class="dataset-details">{{ pkg_dict.spatial_coverage }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.temporal_coverage %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Temporal Coverage") }}</th>
+      <td class="dataset-details">{{ pkg_dict.temporal_coverage }}</td>
+    </tr>
+  {% endif %}
+{% endblock %}

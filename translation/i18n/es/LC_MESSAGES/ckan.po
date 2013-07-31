@@ -3096,6 +3096,26 @@ msgstr "Versión"
 msgid "State"
 msgstr "Estado"
 
+#: ckanext/agesic/templates/package/snippets/additional_info.html:7
+#: ckanext/agesic/templates/package/snippets/package_basic_fields.html:5
+msgid "Update Frequency"
+msgstr "Frecuencia de Actualización"
+
+#: ckanext/agesic/templates/package/snippets/additional_info.html:13
+#: ckanext/agesic/templates/package/snippets/package_basic_fields.html:15
+msgid "Spatial Ref. System"
+msgstr "Sistema de Referencia"
+
+#: ckanext/agesic/templates/package/snippets/additional_info.html:19
+#: ckanext/agesic/templates/package/snippets/package_basic_fields.html:16
+msgid "Spatial Coverage"
+msgstr "Cobertura Espacial"
+
+#: ckanext/agesic/templates/package/snippets/additional_info.html:25
+#: ckanext/agesic/templates/package/snippets/package_basic_fields.html:17
+msgid "Temporal Coverage"
+msgstr "Cobertura Temporal"
+
 #: ckan/templates/package/snippets/data_api_button.html:10
 #: ckan/templates/package/snippets/data_api_button.html:12
 #: ckan/templates_legacy/package/resource_read.html:84
