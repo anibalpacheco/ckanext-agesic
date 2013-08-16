@@ -2258,6 +2258,10 @@ msgstr "Seleccionar"
 msgid "There is no description for this group"
 msgstr "No existe una descripción para esta categoría"
 
+#: ckanext/agesic/templates/snippets/most_viewed.html:5
+msgid "Most viewed datasets"
+msgstr "Conjuntos de datos más vistos"
+
 #: ckan/templates/group/activity_stream.html:3
 #: ckan/templates/group/activity_stream.html:7
 #: ckan/templates/group/read_base.html:25

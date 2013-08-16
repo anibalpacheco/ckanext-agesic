@@ -1,0 +1,8 @@
+<section class="group-list module module-narrow module-shallow">
+  <header class="module-heading">
+    {% set truncate=truncate or 0 %}
+    {% set truncate_title = truncate_title or 0 %}
+    <h3 class="media-heading">{{ _('Most viewed datasets') }}</h3>
+  </header>
+  {{ h.most_viewed() }}
+</section>

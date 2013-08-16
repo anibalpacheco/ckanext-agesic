@@ -1,5 +1,8 @@
+# -*- coding: utf-8 -*-
 import logging
+import csv
 
+from ckan import model
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as tk
 
@@ -40,17 +43,9 @@ def country_codes():
         return None
 
 
-def hello():
-    """
-    An example to return HTML that can be rendered in the templates calling
-    {{ h.hello() }}
-    """
-    return plugins.toolkit.literal('<p>Hello</p>')
-
-
-class ExampleIDatasetFormPlugin(plugins.SingletonPlugin,
+class AgesicIDatasetFormPlugin(plugins.SingletonPlugin,
         tk.DefaultDatasetForm):
-    '''An example IDatasetForm CKAN plugin.
+    '''Implements IDatasetForm CKAN plugin to add some extra fields.
 
     Uses a tag vocabulary to add a custom metadata field to datasets.
 
@@ -91,9 +86,26 @@ class ExampleIDatasetFormPlugin(plugins.SingletonPlugin,
         # that CKAN will use this plugin's custom templates.
         tk.add_public_directory(config, 'public')
         tk.add_template_directory(config, 'templates')
+        self.most_viewed_path = config['agesic.most_viewed_path']
+
+    def most_viewed(self):
+        """
+        Most viewed datasets.
+        Return HTML that can be rendered in the templates calling
+        {{ h.most_viewed() }}
+        """
+        packages = []
+        for row in csv.reader(open(self.most_viewed_path), delimiter='\t'):
+            packages.append(model.Session.query(model.Package).filter(
+                model.Package.name == row[0].replace('/dataset/', '')).first(
+                    ).as_dict())
+        data = {'packages': packages, 'list_class': "unstyled dataset-list",
+            'item_class': "dataset-item module-content", 'truncate': 120,
+            'hide_resources': True}
+        return plugins.toolkit.render_snippet('snippets/package_list.html', data)
 
     def get_helpers(self):
-        return {'country_codes': country_codes, 'hello': hello}
+        return {'country_codes': country_codes, 'most_viewed': self.most_viewed}
 
     def is_fallback(self):
         # Return True to register this plugin as the default handler for
@@ -126,17 +138,17 @@ class ExampleIDatasetFormPlugin(plugins.SingletonPlugin,
         return schema
 
     def create_package_schema(self):
-        schema = super(ExampleIDatasetFormPlugin, self).create_package_schema()
+        schema = super(AgesicIDatasetFormPlugin, self).create_package_schema()
         schema = self._modify_package_schema(schema)
         return schema
 
     def update_package_schema(self):
-        schema = super(ExampleIDatasetFormPlugin, self).update_package_schema()
+        schema = super(AgesicIDatasetFormPlugin, self).update_package_schema()
         schema = self._modify_package_schema(schema)
         return schema
 
     def show_package_schema(self):
-        schema = super(ExampleIDatasetFormPlugin, self).show_package_schema()
+        schema = super(AgesicIDatasetFormPlugin, self).show_package_schema()
 
         # Don't show vocab tags mixed in with normal 'free' tags
         # (e.g. on dataset pages, or on the search page)
@@ -170,39 +182,39 @@ class ExampleIDatasetFormPlugin(plugins.SingletonPlugin,
     # called.
 
     def setup_template_variables(self, context, data_dict):
-        ExampleIDatasetFormPlugin.num_times_setup_template_variables_called += 1
-        return super(ExampleIDatasetFormPlugin, self).setup_template_variables(
+        AgesicIDatasetFormPlugin.num_times_setup_template_variables_called += 1
+        return super(AgesicIDatasetFormPlugin, self).setup_template_variables(
                 context, data_dict)
 
     def new_template(self):
-        ExampleIDatasetFormPlugin.num_times_new_template_called += 1
-        return super(ExampleIDatasetFormPlugin, self).new_template()
+        AgesicIDatasetFormPlugin.num_times_new_template_called += 1
+        return super(AgesicIDatasetFormPlugin, self).new_template()
 
     def read_template(self):
-        ExampleIDatasetFormPlugin.num_times_read_template_called += 1
-        return super(ExampleIDatasetFormPlugin, self).read_template()
+        AgesicIDatasetFormPlugin.num_times_read_template_called += 1
+        return super(AgesicIDatasetFormPlugin, self).read_template()
 
     def edit_template(self):
-        ExampleIDatasetFormPlugin.num_times_edit_template_called += 1
-        return super(ExampleIDatasetFormPlugin, self).edit_template()
+        AgesicIDatasetFormPlugin.num_times_edit_template_called += 1
+        return super(AgesicIDatasetFormPlugin, self).edit_template()
 
     def comments_template(self):
-        ExampleIDatasetFormPlugin.num_times_comments_template_called += 1
-        return super(ExampleIDatasetFormPlugin, self).comments_template()
+        AgesicIDatasetFormPlugin.num_times_comments_template_called += 1
+        return super(AgesicIDatasetFormPlugin, self).comments_template()
 
     def search_template(self):
-        ExampleIDatasetFormPlugin.num_times_search_template_called += 1
-        return super(ExampleIDatasetFormPlugin, self).search_template()
+        AgesicIDatasetFormPlugin.num_times_search_template_called += 1
+        return super(AgesicIDatasetFormPlugin, self).search_template()
 
     def history_template(self):
-        ExampleIDatasetFormPlugin.num_times_history_template_called += 1
-        return super(ExampleIDatasetFormPlugin, self).history_template()
+        AgesicIDatasetFormPlugin.num_times_history_template_called += 1
+        return super(AgesicIDatasetFormPlugin, self).history_template()
 
     def package_form(self):
-        ExampleIDatasetFormPlugin.num_times_package_form_called += 1
-        return super(ExampleIDatasetFormPlugin, self).package_form()
+        AgesicIDatasetFormPlugin.num_times_package_form_called += 1
+        return super(AgesicIDatasetFormPlugin, self).package_form()
 
     # check_data_dict() is deprecated, this method is only here to test that
     # legacy support for the deprecated method works.
     def check_data_dict(self, data_dict, schema=None):
-        ExampleIDatasetFormPlugin.num_times_check_data_dict_called += 1
+        AgesicIDatasetFormPlugin.num_times_check_data_dict_called += 1

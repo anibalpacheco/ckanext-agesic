@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '0.1'
+version = '0.2'
 
 setup(
 	name='ckanext-agesic',
@@ -27,7 +27,7 @@ setup(
 	"""
     [ckan.plugins]
 	# Add plugins here, eg
-	agesic=ckanext.agesic.plugin:ExampleIDatasetFormPlugin
+	agesic=ckanext.agesic.plugin:AgesicIDatasetFormPlugin
     turismo_harvester=ckanext.agesic.harvesters.turismo:TurismoHarvester
 	""",
 )

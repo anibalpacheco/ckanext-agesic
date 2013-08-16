@@ -4,3 +4,4 @@ build
 *.py[c~]
 *.swp
 ckanext/agesic/templates/agesic.css
+ckanext/agesic/public/most_viewed.csv
