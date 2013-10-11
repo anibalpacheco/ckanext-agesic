@@ -96,9 +96,10 @@ class AgesicIDatasetFormPlugin(plugins.SingletonPlugin,
         """
         packages = []
         for row in csv.reader(open(self.most_viewed_path), delimiter='\t'):
-            packages.append(model.Session.query(model.Package).filter(
-                model.Package.name == row[0].replace('/dataset/', '')).first(
-                    ).as_dict())
+            pq = model.Session.query(model.Package).filter(
+                model.Package.name == row[0].replace('/dataset/', ''))
+            if pq:
+                packages.append(pq.first().as_dict())
         data = {'packages': packages, 'list_class': "unstyled dataset-list",
             'item_class': "dataset-item module-content", 'truncate': 120,
             'hide_resources': True}
