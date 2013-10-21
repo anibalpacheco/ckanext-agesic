@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '0.2'
+version = '0.3'
 
 setup(
 	name='ckanext-agesic',
@@ -17,7 +17,7 @@ setup(
 	license='GPL',
 	packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
 	namespace_packages=['apps', 'ckanext', 'ckanext.agesic',
-        'ckanext.agesic.harvesters'],
+        'ckanext.agesic.harvesters', 'ckanext.agesic.controllers'],
 	include_package_data=True,
 	zip_safe=False,
 	install_requires=[

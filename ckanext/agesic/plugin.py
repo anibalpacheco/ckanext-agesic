@@ -79,6 +79,10 @@ class AgesicIDatasetFormPlugin(plugins.SingletonPlugin,
         #intentando remapear register para deshabilitarlo (no funciono)
         #map.connect('register', '/user/register',
         #    controller='controllers.home:HomeController', action='index')
+        map.connect('current_package_list_with_resources',
+            '/agesic/csv/current_package_list_with_resources',
+            controller='ckanext.agesic.controllers.csv:CsvController',
+            action='current_package_list_with_resources')
         return map
 
     def update_config(self, config):
