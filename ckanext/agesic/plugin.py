@@ -107,10 +107,28 @@ class AgesicIDatasetFormPlugin(plugins.SingletonPlugin,
         data = {'packages': packages, 'list_class': "unstyled dataset-list",
             'item_class': "dataset-item module-content", 'truncate': 120,
             'hide_resources': True}
-        return plugins.toolkit.render_snippet('snippets/package_list.html', data)
+        return plugins.toolkit.render_snippet('snippets/package_list.html',
+            data)
+
+    def most_recent(self):
+        """
+        Most recent datasets, based on last_modified attr of its resources.
+        Return HTML that can be rendered in the templates calling
+        {{ h.most_recent() }}
+        """
+        packages = []
+        for package in model.Session.query(model.Package).order_by(
+                model.Package.metadata_modified.desc()).limit(4):
+            packages.append(package.as_dict())
+        data = {'packages': packages, 'list_class': "unstyled dataset-list",
+            'item_class': "dataset-item module-content", 'truncate': 120,
+            'hide_resources': True}
+        return plugins.toolkit.render_snippet('snippets/package_list.html',
+            data)
 
     def get_helpers(self):
-        return {'country_codes': country_codes, 'most_viewed': self.most_viewed}
+        return {'country_codes': country_codes, 'most_viewed':
+            self.most_viewed, 'most_recent': self.most_recent}
 
     def is_fallback(self):
         # Return True to register this plugin as the default handler for

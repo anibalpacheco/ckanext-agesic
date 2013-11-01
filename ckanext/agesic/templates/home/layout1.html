@@ -1,0 +1,36 @@
+<div role="main" class="hero">
+  <div class="container">
+    <div class="row row1">
+      <div class="span6 col1">
+        <div class="module-content box">
+            <section class="featured media-overlay">
+                <object width="408" height="348" data="/938x300_banner.swf"></object>
+            </section>
+        </div>
+      </div>
+      <div class="span6 col2">
+        {% snippet 'home/snippets/search.html' %}
+        <div class="module module-shallow module-narrow module-dark info box">
+            <div style="padding:0px 15px 10px 15px;">
+                <h3 class="heading">{{ _("Applications") }}</h3>
+                <p>{{ _("Add and share your own applications using open data") }}.</p>
+                <a class="btn" href="http://datos.gub.uy/wps/wcm/connect/PEU/PEU/Subhomes/enviar-aplicacion">{{ _("Add application") }}</a>&nbsp;
+                <a class="btn" href="/related?type=application">{{ _("Show applications") }}</a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div role="main">
+  <div class="container">
+    <div class="row row2">
+      <div class="span6 col1">
+          {% snippet 'snippets/most_recent.html', truncate=50, truncate_title=35 %}
+      </div>
+      <div class="span6 col2">
+          {% snippet 'snippets/most_viewed.html', truncate=50, truncate_title=35 %}
+      </div>
+    </div>
+  </div>
+</div>

@@ -14,6 +14,9 @@ class CsvController(BaseController):
         if not new_authz.is_sysadmin(c.user):
             abort(401, _('Unauthorized to list all datasets'))
         content = '<table>'
+        for header in ['name', 'title', 'organizations', 'categories', 'id',
+                'resource name', 'format', 'state', 'last modified']:
+            content += "<th>%s</th>" % header.title()
         for p in model.Session.query(model.Package):
             organizations, categories = [], []
             for g in p.as_dict()['groups']:
@@ -26,6 +29,7 @@ class CsvController(BaseController):
             for r in p.resources:
                 content += '<tr>'
                 for td in [p.name, p.title, ', '.join(organizations),
-                        ', '.join(categories), r.id, r.name, r.format]:
+                        ', '.join(categories), r.id, r.name, r.format, r.state,
+                        r.last_modified]:
                     content += "<td>%s</td>" % td
         return content + '</table>'

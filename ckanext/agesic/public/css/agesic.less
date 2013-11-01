@@ -46,9 +46,9 @@ a:hover, a:focus {
     }
   }
 }
-.hero .search-giant input,
+.homepage .search-giant input,
 .masthead input[type="text"] {
-  border-color: #CCCCCC;
+  border-color: #CCCCCC !important;
 }
 a.tag:hover,
 .masthead .navigation .nav-pills li a:hover,
@@ -56,11 +56,12 @@ a.tag:hover,
   color: #FFFFFF;
   background-color: #095399;
 }
-.hero { background: none transparent;
-  .module-dark { color: #444444;
-    .module-content { background-color: transparent; }
+.hero,
+.homepage { background: none transparent !important;
+  .module-search { color: #444444 !important;
+    .module-content { background-color: transparent !important; }
   }
-  .tags { background-color: transparent; }
+  .tags { background-color: transparent !important; }
 }
 .hero-secondary {
     top: 0;
