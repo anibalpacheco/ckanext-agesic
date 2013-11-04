@@ -15,7 +15,7 @@ class CsvController(BaseController):
             abort(401, _('Unauthorized to list all datasets'))
         content = '<table>'
         for header in ['name', 'title', 'organizations', 'categories', 'id',
-                'resource name', 'format', 'state', 'last modified']:
+                'resource name', 'format', 'state']:
             content += "<th>%s</th>" % header.title()
         for p in model.Session.query(model.Package):
             organizations, categories = [], []
@@ -29,7 +29,6 @@ class CsvController(BaseController):
             for r in p.resources:
                 content += '<tr>'
                 for td in [p.name, p.title, ', '.join(organizations),
-                        ', '.join(categories), r.id, r.name, r.format, r.state,
-                        r.last_modified]:
+                        ', '.join(categories), r.id, r.name, r.format, r.state]:
                     content += "<td>%s</td>" % td
         return content + '</table>'

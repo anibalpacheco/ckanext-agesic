@@ -126,9 +126,17 @@ class AgesicIDatasetFormPlugin(plugins.SingletonPlugin,
         return plugins.toolkit.render_snippet('snippets/package_list.html',
             data)
 
+    def revision_timestamp(self, resource):
+        """
+        Returns the revision timestamp of a resouce in string format.
+        """
+        return model.Session.query(model.Revision).get(
+            resource['revision_id']).timestamp.strftime('%Y-%m-%d %H:%M:%S')
+
     def get_helpers(self):
         return {'country_codes': country_codes, 'most_viewed':
-            self.most_viewed, 'most_recent': self.most_recent}
+            self.most_viewed, 'most_recent': self.most_recent,
+            'revision_timestamp': self.revision_timestamp}
 
     def is_fallback(self):
         # Return True to register this plugin as the default handler for
