@@ -1,11 +1,13 @@
-# TODO: provide a CSV to be downloaded.
+# TODO: provide a CSV to be downloaded using response
+#       see this for an example:
+# https://github.com/okfn/ckanext-qa/blob/master/ckanext/qa/controller.py#L87
 
 import ckan.new_authz as new_authz
-from ckan.lib.base import BaseController
+from ckan.lib.base import BaseController #, response
 from ckan.lib.base import abort
 from ckan.common import _
 from ckan.common import c
-from ckan import model
+from ckan.model import Session, Package, Group
 
 
 class CsvController(BaseController):
@@ -17,11 +19,10 @@ class CsvController(BaseController):
         for header in ['name', 'title', 'organizations', 'categories', 'id',
                 'resource name', 'format', 'state']:
             content += "<th>%s</th>" % header.title()
-        for p in model.Session.query(model.Package):
+        for p in Session.query(Package):
             organizations, categories = [], []
             for g in p.as_dict()['groups']:
-                group = model.Session.query(model.Group).filter(
-                    model.Group.name == g).first()
+                group = Session.query(Group).filter(Group.name == g).first()
                 if group.is_organization:
                     organizations.append(g)
                 else:

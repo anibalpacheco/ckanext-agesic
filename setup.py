@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '0.3'
+version = '0.4'
 
 setup(
 	name='ckanext-agesic',
@@ -25,6 +25,9 @@ setup(
 	],
 	entry_points=\
 	"""
+    [paste.paster_command]
+    brokenurls=ckanext.agesic.commands:BrokenurlsCmd
+
     [ckan.plugins]
 	# Add plugins here, eg
 	agesic=ckanext.agesic.plugin:AgesicIDatasetFormPlugin

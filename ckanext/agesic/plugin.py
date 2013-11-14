@@ -2,7 +2,7 @@
 import logging
 import csv
 
-from ckan import model
+from ckan.model import Session, Package, Revision
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as tk
 
@@ -100,8 +100,8 @@ class AgesicIDatasetFormPlugin(plugins.SingletonPlugin,
         """
         packages = []
         for row in csv.reader(open(self.most_viewed_path), delimiter='\t'):
-            package = model.Session.query(model.Package).filter(
-                model.Package.name == row[0].replace('/dataset/', '')).first()
+            package = Session.query(Package).filter(
+                Package.name == row[0].replace('/dataset/', '')).first()
             if package:
                 packages.append(package.as_dict())
         data = {'packages': packages, 'list_class': "unstyled dataset-list",
@@ -112,13 +112,13 @@ class AgesicIDatasetFormPlugin(plugins.SingletonPlugin,
 
     def most_recent(self):
         """
-        Most recent datasets, based on last_modified attr of its resources.
+        Most recent datasets, based on the metadata_modified attr.
         Return HTML that can be rendered in the templates calling
         {{ h.most_recent() }}
         """
         packages = []
-        for package in model.Session.query(model.Package).order_by(
-                model.Package.metadata_modified.desc()).limit(4):
+        for package in Session.query(Package).order_by(
+                Package.metadata_modified.desc()).limit(4):
             packages.append(package.as_dict())
         data = {'packages': packages, 'list_class': "unstyled dataset-list",
             'item_class': "dataset-item module-content", 'truncate': 120,
@@ -130,7 +130,7 @@ class AgesicIDatasetFormPlugin(plugins.SingletonPlugin,
         """
         Returns the revision timestamp of a resouce in string format.
         """
-        return model.Session.query(model.Revision).get(
+        return Session.query(Revision).get(
             resource['revision_id']).timestamp.strftime('%Y-%m-%d %H:%M:%S')
 
     def get_helpers(self):
