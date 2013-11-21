@@ -1,4 +1,4 @@
-import requests
+from requests import head
 
 from ckan.model import Session, Package
 import ckan.plugins as plugins
@@ -12,5 +12,10 @@ class BrokenurlsCmd(plugins.toolkit.CkanCommand):
         self._load_config()
         for p in Session.query(Package).filter(Package.state == 'active'):
             for r in p.resources:
-                if not requests.head(r.url).ok:
-                    print p.name, p.title, r.url
+                try:
+                    assert head(r.url).ok
+                except AssertionError:
+                    print '%s FROM %s "%s"' % (r.url, p.name, p.title)
+                except Exception, e:
+                    print '%s FROM %s "%s" (%s)' % (r.url, p.name, p.title,
+                        e.__class__.__name__)
