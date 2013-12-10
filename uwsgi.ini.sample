@@ -8,5 +8,6 @@ socket=/var/local/ckan/uwsgi/uwsgi.sock
 pidfile=/var/local/ckan/uwsgi/uwsgi.pid
 vacuum=True
 max-requests=5000
+processes=10
 home=/home/ckan/venv/ckan2
 daemonize=/var/log/uwsgi/ckan.log
