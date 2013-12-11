@@ -117,7 +117,8 @@ class AgesicIDatasetFormPlugin(plugins.SingletonPlugin,
         {{ h.most_recent() }}
         """
         packages = []
-        for package in Session.query(Package).order_by(
+        for package in Session.query(Package).filter(Package.state == 'active',
+                Package.private == False).order_by(
                 Package.metadata_modified.desc()).limit(4):
             packages.append(package.as_dict())
         data = {'packages': packages, 'list_class': "unstyled dataset-list",
