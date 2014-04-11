@@ -31,6 +31,7 @@ Utilizar los siguientes branches y parches en conjunto:
 * 1617-detached-instance
 * ckan.patch (```$ git apply ../ckanext-agesic/ckan.patch```)
 * En ambiente de producción además aplicar el siguiente parche:
+
 ```
 index e1c60cc..83ccf9c 100644
 --- a/ckan/public/base/javascript/client.js
