@@ -29,7 +29,8 @@ Utilizar los siguientes branches y parches en conjunto:
 
 * 1550-what-file-did-i-upload
 * 1617-detached-instance
-* ckan.patch (```$ git apply ../ckanext-agesic/ckan.patch```)
+* https://github.com/anibalpacheco/ckan/tree/1670-broken-api-docs-link
+* Branch ```agesic``` del repositorio https://git.agesic.gub.uy/agesic/ckan/
 * En ambiente de producción además aplicar el siguiente parche:
 
 ```
