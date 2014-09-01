@@ -1,3 +1,4 @@
+import socket
 from datetime import date, timedelta
 from urlparse import urlparse, urlunsplit
 from requests import head
@@ -25,6 +26,11 @@ class BrokenurlsCmd(plugins.toolkit.CkanCommand):
                     url = urlunsplit((o.scheme, o.netloc.replace(
                         'comprasestatales.gub.uy', 'comprasestatales.red.uy'),
                         o.path, o.query, o.fragment))
+                elif 'test.catalogodatos.gub.uy' in o.netloc and \
+                        socket.gethostname() == self.agesic_test_hostname:
+                    url = urlunsplit((o.scheme, o.netloc.replace(
+                        'test.catalogodatos.gub.uy', 'localhost'), o.path,
+                        o.query, o.fragment))
                 else:
                     url = res.url
                 try:
