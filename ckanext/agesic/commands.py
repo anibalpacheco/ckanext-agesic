@@ -1,29 +1,36 @@
+from datetime import date, timedelta
 from urlparse import urlparse, urlunsplit
 from requests import head
 
 from ckan.model import Session, Package
 import ckan.plugins as plugins
 
-
 class BrokenurlsCmd(plugins.toolkit.CkanCommand):
-    """ Check for broken resource urls """
+    """
+    Check for broken resource urls.
+    Additionaly alert for out of date datasets.
+    """
     summary = __doc__
 
     def command(self):
         self._load_config()
-        for p in Session.query(Package).filter(Package.state == 'active'):
-            for r in p.resources:
-                o = urlparse(r.url)
+        for pck in Session.query(Package).filter(Package.state == 'active'):
+            upd_freq = pck.extras.get('update_frequency')
+            if upd_freq and pck.metadata_modified.date() + timedelta(int(
+                    upd_freq)) < date.today():
+                print 'OUT OF DATE: %s - %s' % (pck.name, pck.title)
+            for res in pck.resources:
+                o = urlparse(res.url)
                 if 'comprasestatales.gub.uy' in o.netloc:
                     url = urlunsplit((o.scheme, o.netloc.replace(
                         'comprasestatales.gub.uy', 'comprasestatales.red.uy'),
                         o.path, o.query, o.fragment))
                 else:
-                    url = r.url
+                    url = res.url
                 try:
                     assert head(url).ok
                 except AssertionError:
-                    print '%s FROM %s "%s"' % (url, p.name, p.title)
+                    print '%s FROM %s "%s"' % (url, pck.name, pck.title)
                 except Exception, e:
-                    print '%s FROM %s "%s" (%s)' % (url, p.name, p.title,
+                    print '%s FROM %s "%s" (%s)' % (url, pck.name, pck.title,
                         e.__class__.__name__)
