@@ -91,7 +91,6 @@ class AgesicIDatasetFormPlugin(plugins.SingletonPlugin,
         tk.add_public_directory(config, 'public')
         tk.add_template_directory(config, 'templates')
         self.most_viewed_path = config['agesic.most_viewed_path']
-        self.agesic_test_hostname = config['agesic.test_hostname']
 
     def most_viewed(self):
         """

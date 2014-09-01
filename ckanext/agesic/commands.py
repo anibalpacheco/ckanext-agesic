@@ -27,7 +27,8 @@ class BrokenurlsCmd(plugins.toolkit.CkanCommand):
                         'comprasestatales.gub.uy', 'comprasestatales.red.uy'),
                         o.path, o.query, o.fragment))
                 elif 'test.catalogodatos.gub.uy' in o.netloc and \
-                        socket.gethostname() == self.agesic_test_hostname:
+                        socket.gethostname() == self._get_config().get(
+                            'agesic.test_hostname'):
                     url = urlunsplit((o.scheme, o.netloc.replace(
                         'test.catalogodatos.gub.uy', 'localhost'), o.path,
                         o.query, o.fragment))
