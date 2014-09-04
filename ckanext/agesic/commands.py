@@ -1,4 +1,4 @@
-import socket
+import sys, socket, csv
 from datetime import date, timedelta
 from urlparse import urlparse, urlunsplit
 from requests import head
@@ -9,17 +9,27 @@ import ckan.plugins as plugins
 class BrokenurlsCmd(plugins.toolkit.CkanCommand):
     """
     Check for broken resource urls.
-    Additionaly alert for out of date datasets.
+    Additionaly alert for recently updated and out of date datasets.
     """
     summary = __doc__
 
     def command(self):
         self._load_config()
+        output, today = csv.writer(sys.stdout), date.today()
+        output.writerow(['Fecha', 'Tipo', 'Nombre', 'Titulo', 'Fecha o URL'])
         for pck in Session.query(Package).filter(Package.state == 'active'):
             upd_freq = pck.extras.get('update_frequency')
+            # check if this dataset should have been updated
             if upd_freq and pck.metadata_modified.date() + timedelta(int(
-                    upd_freq)) < date.today():
-                print 'OUT OF DATE: %s - %s' % (pck.name, pck.title)
+                    upd_freq)) < today:
+                output.writerow([today, 'Dataset Desactualizado', pck.name,
+                    pck.title,
+                    pck.metadata_modified.date() + timedelta(int(upd_freq))])
+            # check if this dataset was updated this week
+            if pck.metadata_modified.date() > today - timedelta(7):
+                output.writerow([today, 'Dataset Actualizado', pck.name,
+                    pck.title, pck.metadata_modified.date()])
+            # and now check its resources for broken links
             for res in pck.resources:
                 o = urlparse(res.url)
                 if 'comprasestatales.gub.uy' in o.netloc:
@@ -43,7 +53,8 @@ class BrokenurlsCmd(plugins.toolkit.CkanCommand):
                 try:
                     assert head(url).ok
                 except AssertionError:
-                    print '%s FROM %s "%s"' % (url, pck.name, pck.title)
+                    output.writerow([today, 'Enlace Roto', pck.name, pck.title,
+                        url])
                 except Exception, e:
-                    print '%s FROM %s "%s" (%s)' % (url, pck.name, pck.title,
-                        e.__class__.__name__)
+                    output.writerow([today, 'Enlace Roto - ' + \
+                        e.__class__.__name__, pck.name, pck.title, url])
