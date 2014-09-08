@@ -50,9 +50,9 @@ class BrokenurlsCmd(plugins.toolkit.CkanCommand):
                         o.query, o.fragment))
                 elif 'catalogodatos.gub.uy' in o.netloc and \
                         socket.gethostname() == cfg.get('agesic.prod_hostname'):
-                    url = urlunsplit((o.scheme, o.netloc.replace(
-                        'catalogodatos.gub.uy', 'localhost'), o.path, o.query,
-                        o.fragment))
+                    url = urlunsplit((o.scheme.replace('https', 'http'),
+                        o.netloc.replace('catalogodatos.gub.uy', 'localhost'),
+                        o.path, o.query, o.fragment))
                 else:
                     url = res.url
                 try:
