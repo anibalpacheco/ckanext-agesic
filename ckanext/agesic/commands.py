@@ -1,6 +1,12 @@
-import sys, socket, csv
+import socket, csv, smtplib
 from datetime import date, timedelta
+try:
+    from cStringIO import StringIO
+except ImportError:
+    from StringIO import StringIO
 from urlparse import urlparse, urlunsplit
+from email.MIMEText import MIMEText
+from email.MIMEMultipart import MIMEMultipart
 from requests import head
 
 from ckan.model import Session, Package
@@ -15,7 +21,8 @@ class BrokenurlsCmd(plugins.toolkit.CkanCommand):
 
     def command(self):
         self._load_config()
-        output, today = csv.writer(sys.stdout), date.today()
+        sio = StringIO()
+        output, today, cfg = csv.writer(sio), date.today(), self._get_config()
         output.writerow(['Fecha', 'Tipo', 'Nombre', 'Titulo', 'Fecha o URL'])
         for pck in Session.query(Package).filter(Package.state == 'active'):
             upd_freq = pck.extras.get('update_frequency')
@@ -37,14 +44,12 @@ class BrokenurlsCmd(plugins.toolkit.CkanCommand):
                         'comprasestatales.gub.uy', 'comprasestatales.red.uy'),
                         o.path, o.query, o.fragment))
                 elif 'test.catalogodatos.gub.uy' in o.netloc and \
-                        socket.gethostname() == self._get_config().get(
-                            'agesic.test_hostname'):
+                        socket.gethostname() == cfg.get('agesic.test_hostname'):
                     url = urlunsplit((o.scheme, o.netloc.replace(
                         'test.catalogodatos.gub.uy', 'localhost'), o.path,
                         o.query, o.fragment))
                 elif 'catalogodatos.gub.uy' in o.netloc and \
-                        socket.gethostname() == self._get_config().get(
-                            'agesic.prod_hostname'):
+                        socket.gethostname() == cfg.get('agesic.prod_hostname'):
                     url = urlunsplit((o.scheme, o.netloc.replace(
                         'catalogodatos.gub.uy', 'localhost'), o.path, o.query,
                         o.fragment))
@@ -58,3 +63,18 @@ class BrokenurlsCmd(plugins.toolkit.CkanCommand):
                 except Exception, e:
                     output.writerow([today, 'Enlace Roto - ' + \
                         e.__class__.__name__, pck.name, pck.title, url])
+        adjunto = MIMEText(sio.getvalue())
+        adjunto.add_header('Content-Disposition', 'attachment',
+            filename='brokenurls_%s.csv' % today.strftime("%Y%m%d"))
+        msg = MIMEMultipart()
+        msg['To'] = cfg.get('agesic.brokenurls_msg_to')
+        msg['Subject'] = "[CKAN] Reporte de actualizaciones y enlaces rotos"
+        msg.attach(adjunto)
+        smtp = smtplib.SMTP(cfg.get('smtp.server', 'localhost'),
+            cfg.get('smtp.port', 0))
+        try:
+            smtp.login(cfg.get('smtp.user'), cfg.get('smtp.password'))
+        except smtplib.SMTPException:
+            pass
+        smtp.sendmail(cfg.get('smtp.mail_from'),
+            [cfg.get('agesic.brokenurls_msg_to')], msg.as_string())
