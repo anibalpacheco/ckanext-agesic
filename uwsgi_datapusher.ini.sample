@@ -1,0 +1,13 @@
+[uwsgi]
+uid=nginx
+gid=nginx
+chdir=/usr/local/ckan/pyenv27/bin
+module=datapusher_wsgi:application
+master=True
+socket=/var/local/ckan/uwsgi/datapusher_uwsgi.sock
+pidfile=/var/local/ckan/uwsgi/datapusher_uwsgi.pid
+vacuum=True
+max-requests=500
+processes=1
+home=/usr/local/ckan/pyenv27
+daemonize=/var/log/uwsgi/datapusher.log
