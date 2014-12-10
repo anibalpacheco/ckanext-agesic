@@ -39,24 +39,25 @@ class BrokenurlsCmd(plugins.toolkit.CkanCommand):
             # and now check its resources for broken links
             for res in pck.resources:
                 o = urlparse(res.url)
+                # use an auxiliar variable uri to test acording the environment
                 if 'comprasestatales.gub.uy' in o.netloc:
-                    url = urlunsplit((o.scheme, o.netloc.replace(
+                    uri = urlunsplit((o.scheme, o.netloc.replace(
                         'comprasestatales.gub.uy', 'comprasestatales.red.uy'),
                         o.path, o.query, o.fragment))
                 elif 'test.catalogodatos.gub.uy' in o.netloc and \
                         socket.gethostname() == cfg.get('agesic.test_hostname'):
-                    url = urlunsplit((o.scheme, o.netloc.replace(
+                    uri = urlunsplit((o.scheme, o.netloc.replace(
                         'test.catalogodatos.gub.uy', 'localhost'), o.path,
                         o.query, o.fragment))
                 elif 'catalogodatos.gub.uy' in o.netloc and \
                         socket.gethostname() == cfg.get('agesic.prod_hostname'):
-                    url = urlunsplit((o.scheme.replace('https', 'http'),
+                    uri = urlunsplit((o.scheme.replace('https', 'http'),
                         o.netloc.replace('catalogodatos.gub.uy', 'localhost'),
                         o.path, o.query, o.fragment))
                 else:
-                    url = res.url
+                    uri = res.url
                 try:
-                    assert head(url).ok
+                    assert head(uri).ok
                 except AssertionError:
                     output.writerow([today, 'Enlace Roto', pck.name, pck.title,
                         url])
