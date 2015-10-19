@@ -1,7 +1,0 @@
-<ul class="media-grid" data-module="media-grid">
-  {% for group in groups %}
-    {% if group.packages  %}
-      {% snippet "group/snippets/group_item.html", group=group, position=loop.index %}
-    {% endif %}
-  {% endfor %}
-</ul>
