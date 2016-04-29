@@ -60,10 +60,10 @@ class BrokenurlsCmd(plugins.toolkit.CkanCommand):
                     assert head(uri).ok
                 except AssertionError:
                     output.writerow([today, 'Enlace Roto', pck.name, pck.title,
-                        url])
+                        res.url])
                 except Exception, e:
                     output.writerow([today, 'Enlace Roto - ' + \
-                        e.__class__.__name__, pck.name, pck.title, url])
+                        e.__class__.__name__, pck.name, pck.title, res.url])
         adjunto = MIMEText(sio.getvalue())
         adjunto.add_header('Content-Disposition', 'attachment',
             filename='brokenurls_%s.csv' % today.strftime("%Y%m%d"))
